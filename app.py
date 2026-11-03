@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+import os
 import mysql.connector
 import pandas as pd
 import numpy as np
@@ -9,10 +10,10 @@ app.secret_key = "sales_project_secret"
 
 def get_db_connection():
     connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Sunny@17",
-        database="sales_analysis"
+        host=os.environ.get("DB_HOST"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME")
     )
     return connection
 
